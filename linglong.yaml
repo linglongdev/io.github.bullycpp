@@ -1,0 +1,27 @@
+version: "1"
+
+package:
+  id: io.github.bullycpp
+  name: bullycpp
+  version: 0.1.0.0
+  kind: app
+  description: |
+    A Bully Bootloader PC driver program
+
+command:
+  - /opt/apps/io.github.bullycpp/files/bin/BullyCPP
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/thirtythreeforty/bullycpp.git
+    version: master
+    commit: 7e94dc5e321ce920c064c40bb8830deda1d86146
+
+build: |
+  cd /project/linglong/sources/bullycpp.git/src
+  qmake -makefile PREFIX=${PREFIX} LIB_INSTALL_DIR=${PREFIX}/lib/${TRIPLET}
+  make
+  make install
